@@ -1,5 +1,5 @@
+import 'package:hello_world/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/detail_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,12 +8,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Contacts',
+      title: 'Contact',
       theme: ThemeData(),
-      home: const DetailScreen(),
+      home: const MainScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

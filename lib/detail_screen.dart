@@ -1,103 +1,126 @@
+import 'package:hello_world/main_screen.dart';
+import 'package:hello_world/model/tourism_place.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  const DetailScreen({Key? key, required this.place}) : super(key: key);
+
+  final TourismPlace place;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      appBar: AppBar(
+        title: Text(place.name),
+        // leading: GestureDetector(
+        //   onTap: () {
+        //     Navigator.pop(context);
+        //   },
+        //   child: const Icon(
+        //     Icons.arrow_back,
+        //   ),
+        // ),
+      ),
+      body: SingleChildScrollView(
+      child : SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget> [
-            Image.asset('assets/images/Photo1.jpg'),
+          children: <Widget>[
+            Image.asset(place.imageAsset),
             Container(
-              margin: EdgeInsets.only(top: 16),
-              child: const Text(
-                "Surabaya Submarine Monument",
+              // Title
+              margin: EdgeInsets.only(top: 16.0),
+              child: Text(
+                place.name,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
+                style: const TextStyle(
+                  fontSize: 40.0,
                   fontFamily: 'Lobster',
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 16.0),
+              // Icons
+              margin: const EdgeInsets.symmetric(vertical: 30.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget> [
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
                   Column(
-                    children: const <Widget> [
-                      Icon(Icons.calendar_today),
-                      Text('Open Everyday'),
+                    children: <Widget>[
+                      const Icon(Icons.calendar_today),
+                      Text(place.dayOpen),
                     ],
                   ),
                   Column(
-                    children: const [
-                      Icon(Icons.alarm),
-                      Text('08.00-16.00'),
+                    children: <Widget>[
+                      const Icon(Icons.schedule),
+                      Text(place.timeOpen),
                     ],
                   ),
                   Column(
-                    children: const [
-                      Icon(Icons.attach_money),
-                      Text('Rp 5.000,-'),
+                    children: <Widget>[
+                      const Icon(Icons.attach_money),
+                      Text(place.entryPrice),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
             Container(
+              // Description
               padding: const EdgeInsets.all(16.0),
-              child: const Text(
-                "Museum inside a decommisioned Russian war submarine with tours & an adjacent park with cafes. Clean and well maintained. Car park cost 10K enterance fee 15K/person. You can see KRI Pasopati there, it is a russian whiskey class. You can also watch the video about the indonesian Navy at the building beside the submarine.",
+              child: Text(
+                place.description,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16.0,
-                    fontFamily: 'Oxygen',
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Oxygen',
                 ),
               ),
             ),
             Container(
+              // Slider Image
               height: 150,
-              child: ListView(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.asset(place.detailImages[index]),
+                    ),
+                  );
+                },
+                itemCount: place.detailImages.length,
                 scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ClipRRect(
-                      child: Image.asset('assets/images/Photo1.jpg'),
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ClipRRect(
-                      child: Image.asset('assets/images/Photo2.jpg'),
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ClipRRect(
-                      child: Image.asset('assets/images/Photo3.jpg'),
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ClipRRect(
-                      child: Image.asset('assets/images/Photo4.jpg'),
-                      borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  ),
-                ],
+                // children: [
+                //   Padding(
+                //     padding: const EdgeInsets.all(4.0),
+                //     child: ClipRRect(
+                //       borderRadius: BorderRadius.circular(20.0),
+                //       child: Image.network(place.detailImages[0]),
+                //     ),
+                //   ),
+                //   Padding(
+                //     padding: const EdgeInsets.all(4.0),
+                //     child: ClipRRect(
+                //       borderRadius: BorderRadius.circular(20.0),
+                //       child: Image.network(place.detailImages[1]),
+                //     ),
+                //   ),
+                //   Padding(
+                //     padding: const EdgeInsets.all(4.0),
+                //     child: ClipRRect(
+                //       borderRadius: BorderRadius.circular(20.0),
+                //       child: Image.network(place.detailImages[2]),
+                //     ),
+                //   ),
+                // ],
               ),
             ),
           ],
         ),
+      ),
       ),
     );
   }
