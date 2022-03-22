@@ -1,4 +1,3 @@
-import 'package:hello_world/main_screen.dart';
 import 'package:hello_world/model/tourism_place.dart';
 import 'package:flutter/material.dart';
 
@@ -22,14 +21,14 @@ class DetailScreen extends StatelessWidget {
         // ),
       ),
       body: SingleChildScrollView(
-      child : SafeArea(
+      child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Image.asset(place.imageAsset),
             Container(
               // Title
-              margin: EdgeInsets.only(top: 16.0),
+              margin: const EdgeInsets.only(top: 16.0),
               child: Text(
                 place.name,
                 textAlign: TextAlign.center,
@@ -91,6 +90,7 @@ class DetailScreen extends StatelessWidget {
                     ),
                   );
                 },
+
                 itemCount: place.detailImages.length,
                 scrollDirection: Axis.horizontal,
                 // children: [
@@ -125,4 +125,3 @@ class DetailScreen extends StatelessWidget {
     );
   }
 }
-
